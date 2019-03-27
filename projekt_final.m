@@ -4,8 +4,8 @@ clear all
 
 %% 1.skok
 
-f=6*10^9;
-Gant=36;%1.20 m gain mid band (dBi
+f=10*10^9;
+Gant=40;%1.20 m gain mid band (dBi
 EbN = 10.5;%QPSK
 % EbN = 15;%16QAM
 fb=40*10^6; %56Mb/s
@@ -14,10 +14,10 @@ B=28*10^6;%40MHz
 
 c=3*10^8;
 
-d=4.79*10^3;
+d1=4.79*10^3;
 EIRP=20;%dBm
 
-FSL=((4*pi*d*f)/c)^2;
+FSL=((4*pi*d1*f)/c)^2;
 FSLdB=10*log10(FSL);
 Lgas=0.05*4.79;
 Lcable=0.6;
@@ -29,17 +29,17 @@ k2=0.78;
 Reff=k1*Re;
 Reff2=k2*Re;
 d01=2.63*10^3;
-d02=d-2.63*10^3;
+d02=d1-2.63*10^3;
 x=(d01*d02)/(2*Reff);
 x2=(d01*d02)/(2*Reff2);
 
 
-F1=17.3* sqrt(((d01*d02)*10^-6)/(f*10^-9*d*10^-3));
+F1=17.3* sqrt(((d01*d02)*10^-6)/(f*10^-9*d1*10^-3));
 
 %% 2.skok
 
-d=14*10^3;
-FSL=((4*pi*d*f)/c)^2;
+d2=10.59*10^3;
+FSL=((4*pi*d2*f)/c)^2;
 FSLdB=10*log10(FSL);
 Lgas=0.05*14;
 Lcable=0.6;
@@ -60,9 +60,9 @@ Pp2=EIRP-FSLdB+Gant-Lcable-Lgas;
 
 %% 3skok
 
-d=7.36*10^3;
+d3=11.09*10^3;
 
-FSL=((4*pi*d*f)/c)^2;
+FSL=((4*pi*d3*f)/c)^2;
 FSLdB=10*log10(FSL);
 Lgas=0.05*7.36;
 Lcable=0.6;
@@ -83,9 +83,9 @@ Pp3=EIRP-FSLdB+Gant-Lcable-Lgas;
 
 %% 4sko
 
-d=2.87*10^3;
+d4=2.87*10^3;
 
-FSL=((4*pi*d*f)/c)^2;
+FSL=((4*pi*d4*f)/c)^2;
 FSLdB=10*log10(FSL);
 Lgas=0.05*2.87;
 Lcable=0.6;
@@ -97,11 +97,11 @@ k2=0.78;
 Reff=k1*Re;
 Reff2=k2*Re;
 d01=1.5*10^3;
-d02=d-1.5*10^3;
+d02=d1-1.5*10^3;
 x7=(d01*d02)/(2*Reff);
 x8=(d01*d02)/(2*Reff2);
 
-F4=17.3* sqrt(((d01*d02)*10^-6)/(f*10^-9*d*10^-3));
+F4=17.3* sqrt(((d01*d02)*10^-6)/(f*10^-9*d1*10^-3));
 
 
 %% %citlivost pøijímaèe
@@ -146,10 +146,10 @@ pw=K*(d1^3.1) * (1+epabs)^-1.29 *(f*10^-9)^0.8 * 10^(-0.00089*hl-A1/10); %A=marg
 Pns1=pw/100;
 
 %pro skok 2
-d2=14;
+d2=10.59;
 % dN1=-200;
 K=1*10^(-4.6-0.0027*dN1);
-hr=45+387;
+hr=30+400;
 he=30+451;
 
 ep=(abs(hr-he))/d2;
@@ -160,11 +160,11 @@ pw=K*d2^3.1 * (1+epabs)^-1.29 *(f*10^-9)^0.8 * 10^(-0.00089*hl-A2/10);
 Pns2=pw/100;
 
 %% pro skok 3
-d3=7.36;
+d3=11.09;
 % dN1=-200;
 K=1*10^(-4.6-0.0027*dN1);
 hr=63+356;
-he=45+387;
+he=30+400;
 
 ep=(abs(hr-he))/d3;
 epabs=abs(ep);
