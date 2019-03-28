@@ -11,10 +11,10 @@ EbN = 10.5;%QPSK
 fb=40*10^6; %56Mb/s
 B=28*10^6;%40MHz
 
+d1=4.79*10^3;
 
 c=3*10^8;
 
-d1=4.79*10^3;
 EIRP=20;%dBm
 
 FSL=((4*pi*d1*f)/c)^2;
@@ -28,13 +28,26 @@ k1=4/3;
 k2=0.78;
 Reff=k1*Re;
 Reff2=k2*Re;
-d01=2.63*10^3;
-d02=d1-2.63*10^3;
-x=(d01*d02)/(2*Reff);
-x2=(d01*d02)/(2*Reff2);
 
 
-F1=17.3* sqrt(((d01*d02)*10^-6)/(f*10^-9*d1*10^-3));
+h1t=14+275;
+h1r=30+451;%vyska vysilaèe + nadmoøska vyska
+
+d1prek=1.84*10^3;
+h1prek=298-h1t;
+
+d11=d1prek;
+d12=d1-d1prek;
+
+x11=(d11*d12)/(2*Reff);
+x12=(d11*d12)/(2*Reff2);
+
+h1los = ((h1r-h1t)*d11)/d1;
+
+F1=17.3* sqrt(((d11*d12)*10^-6)/(f*10^-9*d1*10^-3));
+
+hrez11 = (h1los-F1-h1prek-x11);
+hrez12 = (h1los-F1-h1prek-x12);
 
 %% 2.skok
 
@@ -44,19 +57,27 @@ FSLdB=10*log10(FSL);
 Lgas=0.05*14;
 Lcable=0.6;
 Pp2=EIRP-FSLdB+Gant-Lcable-Lgas;
-% 
-% Re=6371*10^3;
-% k1=4/3;
-% k2=0.78;
-% Reff=k1*Re;
-% Reff2=k2*Re;
-% d01=5.3*10^3;
-% d02=d-5.3*10^3;
-% x3=(d1*d2)/(2*Reff);
-% x4=(d1*d2)/(2*Reff2);
-% h2=429;
-% 
-% F2=17.3* sqrt(((d01*d02)*10^-6)/(f*10^-9*d*10^-3));
+ 
+h2t=30+451;
+h2r=30+400;%vyska vysilaèe + nadmoøska vyska
+
+
+d2prek=5.47*10^3; %od Lhotky
+h2prek=408-h2r; 
+
+d21=d2prek;
+d22=d2-d2prek;
+
+x21=(d21*d22)/(2*Reff);
+x22=(d21*d22)/(2*Reff2);
+
+h2los = ((h2t-h2r)*d22)/d2;
+
+F2=17.3* sqrt(((d21*d22)*10^-6)/(f*10^-9*d2*10^-3));
+
+hrez21 = (h2los-F2-h2prek-x21);
+hrez22 = (h2los-F2-h2prek-x22);
+
 
 %% 3skok
 
@@ -68,18 +89,25 @@ Lgas=0.05*7.36;
 Lcable=0.6;
 Pp3=EIRP-FSLdB+Gant-Lcable-Lgas;
 
-% Re=6371*10^3;
-% k1=4/3;
-% k2=0.78;
-% Reff=k1*Re;
-% Reff2=k2*Re;
-% d01=1.5*10^3;
-% d02=d-1.5*10^3;
-% x5=(d01*d02)/(2*Reff);
-% x6=(d01*d02)/(2*Reff2);
-% 
-% F3=17.3* sqrt(((d01*d02)*10^-6)/(f*10^-9*d*10^-3));
+h3t=30+400;
+h3r=63+356;%vyska vysilaèe + nadmoøska vyska
 
+
+d3prek=1.41*10^3; %od Lhotky
+h3prek=404-h3r; 
+
+d31=d3prek;
+d32=d3-d3prek;
+
+x31=(d31*d32)/(2*Reff);
+x32=(d31*d32)/(2*Reff2);
+
+h3los = ((h3t-h3r)*d32)/d3;
+
+F3=17.3* sqrt(((d31*d32)*10^-6)/(f*10^-9*d3*10^-3));
+
+hrez31 = (h3los-F3-h3prek-x31);
+hrez32 = (h3los-F3-h3prek-x32);
 
 %% 4sko
 
@@ -91,17 +119,25 @@ Lgas=0.05*2.87;
 Lcable=0.6;
 Pp4=EIRP-FSLdB+Gant-Lcable-Lgas;
 
-Re=6371*10^3;
-k1=4/3;
-k2=0.78;
-Reff=k1*Re;
-Reff2=k2*Re;
-d01=1.5*10^3;
-d02=d1-1.5*10^3;
-x7=(d01*d02)/(2*Reff);
-x8=(d01*d02)/(2*Reff2);
+h4t=63+356;
+h4r=40+215;%vyska vysilaèe + nadmoøska vyska
 
-F4=17.3* sqrt(((d01*d02)*10^-6)/(f*10^-9*d1*10^-3));
+
+d4prek=1.50*10^3; %od Lhotky
+h4prek=290-h4r; 
+
+d41=d4prek;
+d42=d4-d4prek;
+
+x41=(d41*d42)/(2*Reff);
+x42=(d41*d42)/(2*Reff2);
+
+h4los = ((h4t-h4r)*d42)/d4;
+
+F4=17.3* sqrt(((d41*d42)*10^-6)/(f*10^-9*d4*10^-3));
+
+hrez41 = (h4los-F4-h4prek-x41);
+hrez42 = (h4los-F4-h4prek-x42);
 
 
 %% %citlivost pøijímaèe
